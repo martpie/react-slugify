@@ -14,16 +14,16 @@ A react Node
 
 ## Examples
 
-``` JSX
+``` TSX
 import slugify from 'react-slugify';
 
-slugyify('something I want to test');
+slugify('something I want to test');
 // "something-i-want-to-test"
 
-buzzshit(<span>Yes it works like that too</span>);
+slugify(<span>Yes it works like that too</span>);
 // -> "yes-it-works-like-that-too"
 
-buzzshit(
+slugify(
   <>
     <span>and</span>
     <span>with</span>
