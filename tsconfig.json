@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
+    "target": "es3",
     "module": "commonjs",
     "jsx": "preserve",
     "moduleResolution": "node",
@@ -12,10 +12,14 @@
     "sourceMap": true,
     "strict": true,
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "lib": [
+      "es2017"
+    ]
   },
   "exclude": [
     "**/node_modules",
-    "**/__tests__/**"
+    "**/__tests__/**",
+    "dist/**"
   ]
 }

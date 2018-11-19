@@ -8,6 +8,7 @@ describe ('slugify', () => {
     expect (slugify('something')).toBe('something');
     expect (slugify('this is a test')).toBe('this-is-a-test');
     expect (slugify('And another one')).toBe('and-another-one');
+    expect (slugify('crème brulée')).toBe('creme-brulee');
   });
 
   it ('should handle numbers correctly', () => {
