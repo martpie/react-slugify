@@ -1,0 +1,31 @@
+{
+  "name": "react-slugify",
+  "version": "1.0.0",
+  "description": "Slugify a React node",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martpie/react-slugify.git"
+  },
+  "keywords": [
+    "react",
+    "slug",
+    "slugify"
+  ],
+  "author": "Pierre de la Martiniere <pierre.de.la.martiniere@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/martpie/react-slugify/issues"
+  },
+  "homepage": "https://github.com/martpie/react-slugify#readme",
+  "devDependencies": {
+    "@types/react": "^16.7.6",
+    "react": "^16.6.3",
+    "typescript": "^3.1.6"
+  }
+}
