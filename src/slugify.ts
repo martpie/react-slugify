@@ -35,10 +35,7 @@ const slugify = (node: React.ReactNode): string => {
 
 
   // ReactElement
-  if ('type' in node) {
-    // Would be awesome to uglify(children), but I am not sure how
-    return '';
-  }
+  if ('type' in node) return slugify(node.props.children);
 
   // unhandled case
   return '';
