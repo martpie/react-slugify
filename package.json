@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "description": "Slugify a React node",
   "main": "dist/slugify.js",
+  "files": ["dist"],
   "scripts": {
     "preversion": "npm run test",
     "prepublishOnly": "npm run build",
