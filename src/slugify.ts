@@ -15,19 +15,34 @@ const stripAccents = (str: string): string => {
 
 const harmonize = (text: string, delimiter: string): string => {
   return stripAccents(text)
+    .trim()
     .toLowerCase()
     .replace(/\s+/g, delimiter)
     .replace(new RegExp(`/[^a-z${delimiter}]/g`), '');
 };
 
-const slugify = (node: React.ReactNode, delimiter = '-'): string => {
-  // undefined, null, boolean
+interface SlugifyOptions {
+  delimiter?: string;
+  prefix?: string;
+}
+
+const slugify = (
+  node: React.ReactNode,
+  options: SlugifyOptions = { delimiter: '-', prefix: '' }
+): string => {
+  if (!options.delimiter) options.delimiter = '-';
+  if (!options.prefix) options.prefix = '';
+
   if (!node || typeof node === 'boolean') {
     return '';
   }
 
-  // string, number
-  if (typeof node === 'string') return harmonize(node, delimiter);
+  const { delimiter, prefix } = options;
+
+  // string
+  if (typeof node === 'string') return harmonize(`${prefix} ${node}`, delimiter);
+
+  // number
   if (typeof node === 'number') return String(node);
 
   // empty object
@@ -45,12 +60,15 @@ const slugify = (node: React.ReactNode, delimiter = '-'): string => {
 
   // ReactNodeArray
   if (node instanceof Array) {
-    return node.map(n => slugify(n, delimiter)).join(delimiter);
+    return slugify(
+      node.map(n => slugify(n, { delimiter })).join(delimiter),
+      options
+    );
   }
 
 
   // ReactElement
-  if ('type' in node) return slugify(node.props.children, delimiter);
+  if ('type' in node) return slugify(node.props.children, options);
 
   // unhandled case
   return '';
