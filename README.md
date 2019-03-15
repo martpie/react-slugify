@@ -15,7 +15,7 @@ Slugify a React node
 
 ## Examples
 
-```jsx
+```tsx
 import slugify from 'react-slugify';
 
 slugify('something I want to test');
@@ -48,6 +48,7 @@ slugify(
 
 slugify(
   <h3>Crème brulée receipe</h3>,
-  { delimiter: '_', prefix: 'user-content' });
+  { delimiter: '_', prefix: 'user-content' }
+);
 // -> user-content_creme_brulee_receipe
 ```
