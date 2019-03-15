@@ -43,7 +43,7 @@ const slugify = (
   if (typeof node === 'string') return harmonize(`${prefix} ${node}`, delimiter);
 
   // number
-  if (typeof node === 'number') return String(node);
+  if (typeof node === 'number') return harmonize(`${prefix} ${node}`, delimiter);
 
   // empty object
   if (typeof node === 'object' && Object.keys(node).length === 0) {

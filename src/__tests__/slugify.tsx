@@ -45,6 +45,12 @@ describe ('slugify', () => {
     ).toBe('creme_brulee');
 
     expect(slugify(<>this IS a NoDe</>, { delimiter: '.' })).toBe('this.is.a.node');
+
+    expect(slugify([
+      <span>here</span>,
+      <span>are</span>,
+      <span>multiple spans</span>,
+    ])).toBe('here-are-multiple-spans');
   });
 
   it ('should handle custom delimiters composed of multiple caracters', () => {
@@ -69,6 +75,8 @@ describe ('slugify', () => {
       slugify('this is a test', { prefix: 'user-content' })
     ).toBe('user-content-this-is-a-test');
 
+    expect (slugify(9876, { prefix: 'tada' })).toBe('tada-9876');
+
     expect(
       slugify(<h2>this is a test</h2>, { prefix: 'user-content' })
     ).toBe('user-content-this-is-a-test');
@@ -89,6 +97,15 @@ describe ('slugify', () => {
     expect(
       slugify('this is a test', { prefix: 'user-content', delimiter: '.' })
     ).toBe('user-content.this.is.a.test');
+
+    expect (slugify(9876, { prefix: 'tada', delimiter: '.' })).toBe('tada.9876');
+
+    expect(
+      slugify(
+        <span>this IS a NoDe</span>,
+        { prefix: 'pref', delimiter: '.' }
+      )
+    ).toBe('pref.this.is.a.node');
 
     expect(
       slugify(
