@@ -6,17 +6,12 @@ Slugify a React node
 
 ## Usage
 
-```
-slugify(node[, delimiter])
-```
+###  `slugify(node[, options])`
 
-##### Parameters:
-
-`node`<br />
-A react Node
-
-`delimiter`<br />
-The slug delimiter, default to `'-'`
+- `node` String, Number, Fragment, Array of nodes
+- `options` Object (optional)
+  - `delimiter` String (default is `'-'`)
+  - `prefix` String (default is `''`)
 
 ## Examples
 
@@ -38,6 +33,21 @@ slugify(
 );
 // -> "and-with-fragments-or-arrays"
 
-slugify(<h3>Crème brulée receipe</h3>, '_');
+slugify(
+  <h3>Crème brulée receipe</h3>,
+  { delimiter: '_' }
+);
 // -> creme_brulee_receipe
+
+slugify(
+  <h3>Crème brulée receipe</h3>,
+  { prefix: 'user-content' }
+);
+// -> user-content-creme-brulee-receipe
+
+
+slugify(
+  <h3>Crème brulée receipe</h3>,
+  { delimiter: '_', prefix: 'user-content' });
+// -> user-content_creme_brulee_receipe
 ```
