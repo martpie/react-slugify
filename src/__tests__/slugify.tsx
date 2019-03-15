@@ -36,6 +36,22 @@ describe ('slugify', () => {
       <span>here</span>,
       <span>are</span>,
       <span>multiple spans</span>,
-    ])).toBe('here-are-multiple-spans');
+    ], '-')).toBe('here-are-multiple-spans');
+  });
+
+  it ('should handle custom delimiters correctly', () => {
+    expect (slugify('crème brulée', '_')).toBe('creme_brulee');
+
+    expect(slugify(<>this IS a NoDe</>, '.')).toBe('this.is.a.node');
+  });
+
+  it ('should handle custom delimiters composed of multiple caracters', () => {
+    expect(slugify([
+      <span>here</span>,
+      <span>are</span>,
+      <span>multiple spans</span>,
+    ], '--')).toBe('here--are--multiple--spans');
+
+    expect(slugify(<span>this IS a NoDe</span>, '__')).toBe('this__is__a__node');
   });
 });
