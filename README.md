@@ -1,6 +1,8 @@
 # react-slugify
 
-![build status](https://img.shields.io/circleci/project/github/martpie/react-slugify/master.svg?style=flat-square)
+
+[![Build Status](https://img.shields.io/circleci/project/github/martpie/react-slugify.svg)](https://circleci.com/gh/martpie/react-slugify)
+[![Dependencies](https://david-dm.org/martpie/react-slugify.svg)](https://github.com/martpie/react-slugify)
 
 Slugify a React node
 
