@@ -112,8 +112,13 @@ describe('slugify', () => {
 
   it('should remove special caracters', () => {
     expect(slugify('pierre@gmail.com')).toBe('pierre-gmail-com');
-    // expect(
-    //   slugify('this is  *+~.()\'"!:@ a test with special characters')
-    // ).toBe('this-is-a test-with-special-characters');
+
+    expect(slugify('this is@a test with special characters')).toBe(
+      'this-is-a-test-with-special-characters'
+    );
+
+    expect(slugify('this is*+~.()\'"!:@ a test with special characters')).toBe(
+      'this-is-a-test-with-special-characters'
+    );
   });
 });

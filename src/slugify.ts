@@ -25,15 +25,14 @@ const harmonize = (
 ): string => {
   const harmonized = stripAccents(text)
     .trim()
-    .toLowerCase()
-    .replace(/\s+/g, delimiter);
+    .toLowerCase();
 
   if (ignoreInvalid) {
-    return harmonized;
+    return harmonized.replace(/\s+/g, delimiter);
   }
 
   return harmonized.replace(
-    new RegExp(`[^a-z0-9${delimiter}]`, 'g'),
+    new RegExp(`[^a-z0-9${delimiter}]\+`, 'g'),
     delimiter
   );
 };
