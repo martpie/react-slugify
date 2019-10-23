@@ -15,9 +15,6 @@ const stripAccents = (str: string): string => {
   return str.replace(reg, replacement);
 };
 
-// *+~.()\'"!:@
-// const blacklist = ['*', '+', '~', '.', '(', ')', '\\', "'", '"', '!', ':', '@'];
-
 const harmonize = (
   text: string,
   delimiter: string,
