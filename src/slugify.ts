@@ -1,8 +1,10 @@
 import * as React from 'react';
 
 const stripAccents = (str: string): string => {
-  const accents = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
-  const fixes = 'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
+  const accents =
+    'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+  const fixes =
+    'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
   const split = accents.split('').join('|');
   const reg = new RegExp(`(${split})`, 'g');
 
@@ -13,12 +15,27 @@ const stripAccents = (str: string): string => {
   return str.replace(reg, replacement);
 };
 
-const harmonize = (text: string, delimiter: string): string => {
-  return stripAccents(text)
+// *+~.()\'"!:@
+// const blacklist = ['*', '+', '~', '.', '(', ')', '\\', "'", '"', '!', ':', '@'];
+
+const harmonize = (
+  text: string,
+  delimiter: string,
+  ignoreInvalid = false
+): string => {
+  const harmonized = stripAccents(text)
     .trim()
     .toLowerCase()
-    .replace(/\s+/g, delimiter)
-    .replace(new RegExp(`/[^a-z${delimiter}]/g`), '');
+    .replace(/\s+/g, delimiter);
+
+  if (ignoreInvalid) {
+    return harmonized;
+  }
+
+  return harmonized.replace(
+    new RegExp(`[^a-z0-9${delimiter}]`, 'g'),
+    delimiter
+  );
 };
 
 interface SlugifyOptions {
@@ -39,11 +56,17 @@ const slugify = (
 
   const { delimiter, prefix } = options;
 
-  // string
-  if (typeof node === 'string') return harmonize(`${prefix} ${node}`, delimiter);
+  // string, number
+  if (typeof node === 'string' || typeof node === 'number') {
+    const harmonizedPrefix = harmonize(prefix, delimiter, true);
+    const harmonizedNode = harmonize(String(node), delimiter);
 
-  // number
-  if (typeof node === 'number') return harmonize(`${prefix} ${node}`, delimiter);
+    if (harmonizedPrefix) {
+      return `${harmonizedPrefix}${delimiter}${harmonizedNode}`;
+    }
+
+    return harmonizedNode;
+  }
 
   // empty object
   if (typeof node === 'object' && Object.keys(node).length === 0) {
@@ -65,7 +88,6 @@ const slugify = (
       options
     );
   }
-
 
   // ReactElement
   if ('type' in node) return slugify(node.props.children, options);
