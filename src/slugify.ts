@@ -2,9 +2,9 @@ import * as React from 'react';
 
 const stripAccents = (str: string): string => {
   const accents =
-    'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+    'ÀÁÂÃÄÅĄàáâãäåąÒÓÔÕÕÖØòóôõöøÈÉÊËĘèéêëðęÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠŚšśŸÿýŽŹŻžźżŁłŃń';
   const fixes =
-    'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
+    'AAAAAAAaaaaaaaOOOOOOOooooooEEEEEeeeeeeCCccDIIIIiiiiUUUUuuuuNnSSssYyyZZZzzzLlNn';
   const split = accents.split('').join('|');
   const reg = new RegExp(`(${split})`, 'g');
 
@@ -20,9 +20,7 @@ const harmonize = (
   delimiter: string,
   ignoreInvalid = false
 ): string => {
-  const harmonized = stripAccents(text)
-    .trim()
-    .toLowerCase();
+  const harmonized = stripAccents(text).trim().toLowerCase();
 
   if (ignoreInvalid) {
     return harmonized.replace(/\s+/g, delimiter);
@@ -80,7 +78,7 @@ const slugify = (
   // ReactNodeArray
   if (node instanceof Array) {
     return slugify(
-      node.map(n => slugify(n, { delimiter })).join(delimiter),
+      node.map((n) => slugify(n, { delimiter })).join(delimiter),
       options
     );
   }
