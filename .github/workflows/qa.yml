@@ -26,10 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - run:
-        name: 'Unit tests'
-        command: 'npm run test'
+      - name: 'Unit tests'
+        run: 'npm run test'
 
-      - run:
-        name: 'Build'
-        command: 'npm run build'
+      - name: 'Build'
+        run: 'npm run build'
