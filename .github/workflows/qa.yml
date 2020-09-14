@@ -1,4 +1,4 @@
-name: build
+name: qa
 
 on: [push, pull_request]
 

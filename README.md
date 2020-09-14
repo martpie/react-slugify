@@ -1,14 +1,13 @@
 # react-slugify
 
-
-[![Build Status](https://img.shields.io/circleci/project/github/martpie/react-slugify.svg)](https://circleci.com/gh/martpie/react-slugify)
+![Build status](https://github.com/martpie/react-slugify/workflows/qa/badge.svg)
 [![Dependencies](https://david-dm.org/martpie/react-slugify.svg)](https://github.com/martpie/react-slugify)
 
-Slugify a React node
+Slugify a React node.
 
 ## Usage
 
-###  `slugify(node[, options])`
+### `slugify(node[, options])`
 
 - `node` String, Number, Fragment, Array of nodes
 - `options` Object (optional)
@@ -35,22 +34,15 @@ slugify(
 );
 // -> "and-with-fragments-or-arrays"
 
-slugify(
-  <h3>Crème brulée receipe</h3>,
-  { delimiter: '_' }
-);
+slugify(<h3>Crème brulée receipe</h3>, { delimiter: '_' });
 // -> creme_brulee_receipe
 
-slugify(
-  <h3>Crème brulée receipe</h3>,
-  { prefix: 'user-content' }
-);
+slugify(<h3>Crème brulée receipe</h3>, { prefix: 'user-content' });
 // -> user-content-creme-brulee-receipe
 
-
-slugify(
-  <h3>Crème brulée receipe</h3>,
-  { delimiter: '_', prefix: 'user-content' }
-);
+slugify(<h3>Crème brulée receipe</h3>, {
+  delimiter: '_',
+  prefix: 'user-content',
+});
 // -> user-content_creme_brulee_receipe
 ```
