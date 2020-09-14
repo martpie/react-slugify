@@ -1,6 +1,6 @@
 # react-slugify
 
-![Build status](https://github.com/martpie/react-slugify/workflows/qa/badge.svg)
+![Build status](https://github.com/martpie/react-slugify/workflows/tests/badge.svg)
 [![Dependencies](https://david-dm.org/martpie/react-slugify.svg)](https://github.com/martpie/react-slugify)
 
 Slugify a React node.
