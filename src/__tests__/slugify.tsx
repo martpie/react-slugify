@@ -38,7 +38,7 @@ describe('slugify', () => {
       slugify([
         <span>here</span>,
         <span>are</span>,
-        <span>multiple spans</span>
+        <span>multiple spans</span>,
       ])
     ).toBe('here-are-multiple-spans');
   });
@@ -54,7 +54,7 @@ describe('slugify', () => {
       slugify([
         <span>here</span>,
         <span>are</span>,
-        <span>multiple spans</span>
+        <span>multiple spans</span>,
       ])
     ).toBe('here-are-multiple-spans');
   });
@@ -119,6 +119,10 @@ describe('slugify', () => {
 
     expect(slugify('this is*+~.()\'"!:@ a test with special characters')).toBe(
       'this-is-a-test-with-special-characters'
+    );
+
+    expect(slugify('Mężny bądź chroń pułk twój i sześć flag')).toBe(
+      'mezny-badz-chron-pulk-twoj-i-szesc-flag'
     );
   });
 });
