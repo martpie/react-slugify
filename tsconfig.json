@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "es3",
     "module": "commonjs",
-    "jsx": "preserve",
+    "jsx": "react",
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -13,14 +13,7 @@
     "strict": true,
     "outDir": "dist",
     "declaration": true,
-    "lib": [
-      "es2017",
-      "dom"
-    ]
+    "lib": ["es2017", "dom"]
   },
-  "exclude": [
-    "**/node_modules",
-    "**/__tests__/**",
-    "dist/**"
-  ]
+  "exclude": ["**/node_modules", "**/__tests__/**", "dist/**"]
 }
