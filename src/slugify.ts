@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-const stripAccents = (str: string): string => {
+/**
+ * Remove all accentuated characters from a string
+ */
+const stripAccents = (input: string): string => {
   const accents =
     'ÀÁÂÃÄÅĄàáâãäåąÒÓÔÕÕÖØòóôõöøÈÉÊËĘèéêëðęÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠŚšśŸÿýŽŹŻžźżŁłŃń';
   const fixes =
@@ -12,15 +15,19 @@ const stripAccents = (str: string): string => {
     return fixes[accents.indexOf(a)] || '';
   }
 
-  return str.replace(reg, replacement);
+  return input.replace(reg, replacement);
 };
 
+/**
+ * Harmonize a string by removing spaces, non-alphabetical caracters and by
+ * adding delimiter
+ */
 const harmonize = (
-  text: string,
+  input: string,
   delimiter: string,
   ignoreInvalid = false
 ): string => {
-  const harmonized = stripAccents(text).trim().toLowerCase();
+  const harmonized = stripAccents(input).trim().toLowerCase();
 
   if (ignoreInvalid) {
     return harmonized.replace(/\s+/g, delimiter);
@@ -37,6 +44,9 @@ interface SlugifyOptions {
   prefix?: string;
 }
 
+/**
+ * Slugify a React node
+ */
 const slugify = (
   node: React.ReactNode,
   options: SlugifyOptions = { delimiter: '-', prefix: '' }
@@ -67,9 +77,6 @@ const slugify = (
     return '';
   }
 
-  // We did the check about empty object before
-  // const castedNode = node as React.ReactElement<any> | React.ReactNodeArray | React.ReactPortal;
-
   // ReactPortal
   if ('children' in node) {
     return slugify(node.children);
@@ -78,7 +85,7 @@ const slugify = (
   // ReactNodeArray
   if (node instanceof Array) {
     return slugify(
-      node.map((n) => slugify(n, { delimiter })).join(delimiter),
+      node.map((subNode) => slugify(subNode, { delimiter })).join(delimiter),
       options
     );
   }
