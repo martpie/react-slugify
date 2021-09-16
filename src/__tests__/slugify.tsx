@@ -1,4 +1,3 @@
-// import { ReactNode } from 'react';
 import * as React from 'react';
 
 import slugify from '../slugify';
@@ -124,5 +123,27 @@ describe('slugify', () => {
     expect(slugify('Mężny bądź chroń pułk twój i sześć flag')).toBe(
       'mezny-badz-chron-pulk-twoj-i-szesc-flag'
     );
+  });
+
+  it('should remove multiple following delimiters', () => {
+    expect(slugify('a little slug of mine - Slug')).toBe(
+      'a-little-slug-of-mine-slug'
+    );
+    expect(slugify('Hello - World')).toBe('hello-world');
+    expect(slugify('Hello - World', { delimiter: '__' })).toBe('hello__world');
+  });
+
+  it('should not end with a delimiter', () => {
+    expect(slugify('a little slug of mine @')).toBe('a-little-slug-of-mine');
+    expect(
+      slugify('a little slug of mine @', { prefix: 'tada', delimiter: '||' })
+    ).toBe('tada||a||little||slug||of||mine');
+  });
+
+  it('should not start with a delimiter', () => {
+    expect(slugify('@ a little slug of mine')).toBe('a-little-slug-of-mine');
+    expect(
+      slugify('@ a little slug of mine', { prefix: 'tada', delimiter: '||' })
+    ).toBe('tada||a||little||slug||of||mine');
   });
 });

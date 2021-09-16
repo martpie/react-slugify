@@ -18,6 +18,12 @@ const stripAccents = (input: string): string => {
   return input.replace(reg, replacement);
 };
 
+const getSafeRegexpString = (input: string): string =>
+  input
+    .split('')
+    .map((char) => `\\${char}`)
+    .join('');
+
 /**
  * Harmonize a string by removing spaces, non-alphabetical caracters and by
  * adding delimiter
@@ -28,15 +34,17 @@ const harmonize = (
   ignoreInvalid = false
 ): string => {
   const harmonized = stripAccents(input).trim().toLowerCase();
+  const safeDelimiter = getSafeRegexpString(delimiter);
 
   if (ignoreInvalid) {
     return harmonized.replace(/\s+/g, delimiter);
   }
 
-  return harmonized.replace(
-    new RegExp(`[^a-z0-9${delimiter}]\+`, 'g'),
-    delimiter
-  );
+  return harmonized
+    .replace(new RegExp(`[^a-z0-9${safeDelimiter}]+`, 'g'), delimiter) // Replace all non-valid caracters by delimiter
+    .replace(new RegExp(`${safeDelimiter}+`, 'g'), delimiter) // Remove multiple delimiters repetition
+    .replace(new RegExp(`^${safeDelimiter}`, 'g'), '') // remove delimiter at the beginning
+    .replace(new RegExp(`${safeDelimiter}$`, 'g'), ''); // remove delimiter at the end
 };
 
 interface SlugifyOptions {
