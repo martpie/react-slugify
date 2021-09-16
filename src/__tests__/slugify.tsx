@@ -130,6 +130,8 @@ describe('slugify', () => {
     expect(slugify('a little slug of mine - Slug')).toBe(
       'a-little-slug-of-mine-slug'
     );
+    expect(slugify('Hello - World')).toBe('hello-world');
+    expect(slugify('Hello - World', { delimiter: '__' })).toBe('hello__world');
   });
 
   it('should not end with a delimiter', () => {

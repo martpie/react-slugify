@@ -33,10 +33,11 @@ const harmonize = (
     return harmonized.replace(/\s+/g, delimiter);
   }
 
-  return harmonized.replace(
-    new RegExp(`[^a-z0-9${delimiter}]\+`, 'g'),
-    delimiter
-  );
+  const safeDelimiter = delimiter.split('').map((char) => `\\${char}`);
+
+  return harmonized
+    .replace(new RegExp(`[^a-z0-9${delimiter}]\+`, 'g'), delimiter)
+    .replace(new RegExp(`${safeDelimiter}+`, 'g'), delimiter);
 };
 
 interface SlugifyOptions {
