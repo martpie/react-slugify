@@ -109,7 +109,7 @@ describe('slugify', () => {
     ).toBe('someprefix--here--are--multiple--spans');
   });
 
-  it('should remove special caracters', () => {
+  it('should remove special characters', () => {
     expect(slugify('pierre@gmail.com')).toBe('pierre-gmail-com');
 
     expect(slugify('this is@a test with special characters')).toBe(
@@ -122,6 +122,10 @@ describe('slugify', () => {
 
     expect(slugify('Mężny bądź chroń pułk twój i sześć flag')).toBe(
       'mezny-badz-chron-pulk-twoj-i-szesc-flag'
+    );
+
+    expect(slugify('đây là một thử nghiệm đối với việc xóa các âm tiết tiếng việt')).toBe(
+      'day-la-mot-thu-nghiem-doi-voi-viec-xoa-cac-am-tiet-tieng-viet'
     );
   });
 
