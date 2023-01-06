@@ -4,11 +4,11 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [16]
 
     steps:
       - uses: actions/checkout@v1
@@ -26,8 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: 'Unit tests'
-        run: 'npm run test'
+      - name: "Unit tests"
+        run: "npm run test"
 
-      - name: 'Build'
-        run: 'npm run build'
+      - name: "Build"
+        run: "npm run build"
