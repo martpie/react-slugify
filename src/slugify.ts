@@ -68,6 +68,11 @@ const slugify = (
 
   const { delimiter, prefix } = options;
 
+  // boolean
+  if (typeof node === "boolean") {
+    return ""; // not much we can do here
+  }
+
   // string, number
   if (typeof node === "string" || typeof node === "number") {
     const harmonizedPrefix = harmonize(prefix, delimiter, true);
@@ -80,26 +85,23 @@ const slugify = (
     return harmonizedNode;
   }
 
-  // empty object
-  if (typeof node === "object" && Object.keys(node).length === 0) {
-    return "";
-  }
-
   // ReactPortal
   if ("children" in node) {
-    return slugify(node.children as any); // FIXME
-  }
-
-  // ReactNodeArray
-  if (node instanceof Array) {
-    return slugify(
-      node.map((subNode) => slugify(subNode, { delimiter })).join(delimiter),
-      options
-    );
+    return slugify(node.children);
   }
 
   // ReactElement
   if ("type" in node) return slugify(node.props.children, options);
+
+  // ReactFragment (including array of nodes)
+  if (Symbol.iterator in node) {
+    return slugify(
+      Array.from(node)
+        .map((subNode) => slugify(subNode, { delimiter }))
+        .join(delimiter),
+      options
+    );
+  }
 
   // unhandled case
   return "";
