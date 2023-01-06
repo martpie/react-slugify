@@ -1,18 +1,18 @@
-import * as React from 'react';
+import * as React from "react";
 
 /**
  * Remove all accentuated characters from a string
  */
 const stripAccents = (input: string): string => {
   const accents =
-		"ÀÁÂÃÄÅĄàáâãäåąÒÓÔÕÕÖØòóôõöøÈÉÊËĘèéêëðęÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠŚšśŸÿýŽŹŻžźżŁłŃńàáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ";
+    "ÀÁÂÃÄÅĄàáâãäåąÒÓÔÕÕÖØòóôõöøÈÉÊËĘèéêëðęÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠŚšśŸÿýŽŹŻžźżŁłŃńàáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ";
   const fixes =
-		"AAAAAAAaaaaaaaOOOOOOOooooooEEEEEeeeeeeCCccDIIIIiiiiUUUUuuuuNnSSssYyyZZZzzzLlNnaaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy";
-  const split = accents.split('').join('|');
-  const reg = new RegExp(`(${split})`, 'g');
+    "AAAAAAAaaaaaaaOOOOOOOooooooEEEEEeeeeeeCCccDIIIIiiiiUUUUuuuuNnSSssYyyZZZzzzLlNnaaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy";
+  const split = accents.split("").join("|");
+  const reg = new RegExp(`(${split})`, "g");
 
   function replacement(a: string) {
-    return fixes[accents.indexOf(a)] || '';
+    return fixes[accents.indexOf(a)] || "";
   }
 
   return input.replace(reg, replacement);
@@ -20,9 +20,9 @@ const stripAccents = (input: string): string => {
 
 const getSafeRegexpString = (input: string): string =>
   input
-    .split('')
+    .split("")
     .map((char) => `\\${char}`)
-    .join('');
+    .join("");
 
 /**
  * Harmonize a string by removing spaces, non-alphabetical caracters and by
@@ -41,10 +41,10 @@ const harmonize = (
   }
 
   return harmonized
-    .replace(new RegExp(`[^a-z0-9${safeDelimiter}]+`, 'g'), delimiter) // Replace all non-valid caracters by delimiter
-    .replace(new RegExp(`${safeDelimiter}+`, 'g'), delimiter) // Remove multiple delimiters repetition
-    .replace(new RegExp(`^${safeDelimiter}`, 'g'), '') // remove delimiter at the beginning
-    .replace(new RegExp(`${safeDelimiter}$`, 'g'), ''); // remove delimiter at the end
+    .replace(new RegExp(`[^a-z0-9${safeDelimiter}]+`, "g"), delimiter) // Replace all non-valid caracters by delimiter
+    .replace(new RegExp(`${safeDelimiter}+`, "g"), delimiter) // Remove multiple delimiters repetition
+    .replace(new RegExp(`^${safeDelimiter}`, "g"), "") // remove delimiter at the beginning
+    .replace(new RegExp(`${safeDelimiter}$`, "g"), ""); // remove delimiter at the end
 };
 
 interface SlugifyOptions {
@@ -57,19 +57,19 @@ interface SlugifyOptions {
  */
 const slugify = (
   node: React.ReactNode,
-  options: SlugifyOptions = { delimiter: '-', prefix: '' }
+  options: SlugifyOptions = { delimiter: "-", prefix: "" }
 ): string => {
-  if (!options.delimiter) options.delimiter = '-';
-  if (!options.prefix) options.prefix = '';
+  if (!options.delimiter) options.delimiter = "-";
+  if (!options.prefix) options.prefix = "";
 
-  if (!node || typeof node === 'boolean') {
-    return '';
+  if (!node || typeof node === "boolean") {
+    return "";
   }
 
   const { delimiter, prefix } = options;
 
   // string, number
-  if (typeof node === 'string' || typeof node === 'number') {
+  if (typeof node === "string" || typeof node === "number") {
     const harmonizedPrefix = harmonize(prefix, delimiter, true);
     const harmonizedNode = harmonize(String(node), delimiter);
 
@@ -81,13 +81,13 @@ const slugify = (
   }
 
   // empty object
-  if (typeof node === 'object' && Object.keys(node).length === 0) {
-    return '';
+  if (typeof node === "object" && Object.keys(node).length === 0) {
+    return "";
   }
 
   // ReactPortal
-  if ('children' in node) {
-    return slugify(node.children);
+  if ("children" in node) {
+    return slugify(node.children as any); // FIXME
   }
 
   // ReactNodeArray
@@ -99,10 +99,10 @@ const slugify = (
   }
 
   // ReactElement
-  if ('type' in node) return slugify(node.props.children, options);
+  if ("type" in node) return slugify(node.props.children, options);
 
   // unhandled case
-  return '';
+  return "";
 };
 
 export default slugify;
