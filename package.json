@@ -4,7 +4,9 @@
   "description": "Slugify a React node",
   "main": "dist/slugify.js",
   "files": [
-    "dist"
+    "src",
+    "dist",
+    "!**/__tests__"
   ],
   "scripts": {
     "preversion": "npm run test",
