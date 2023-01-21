@@ -5,9 +5,9 @@ import * as React from "react";
  */
 const stripAccents = (input: string): string => {
   const accents =
-    "ÀÁÂÃÄÅĄàáâãäåąÒÓÔÕÕÖØòóôõöøÈÉÊËĘèéêëðęÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠŚšśŸÿýŽŹŻžźżŁłŃńàáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñçýỳỹỵỷ";
+    "ÀÁÂÃÄÅĄàáâãäåąÒÓÔÕÕÖØòóôõöøÈÉÊËĘèéêëðęÇĆçćÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠŚšśŸÿýŽŹŻžźżŁłŃńàáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîüûñçýỳỹỵỷğışĞİŞ";
   const fixes =
-    "AAAAAAAaaaaaaaOOOOOOOooooooEEEEEeeeeeeCCccDIIIIiiiiUUUUuuuuNnSSssYyyZZZzzzLlNnaaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouuncyyyyy";
+    "AAAAAAAaaaaaaaOOOOOOOooooooEEEEEeeeeeeCCccDIIIIiiiiUUUUuuuuNnSSssYyyZZZzzzLlNnaaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiuuncyyyyygisGIS";
   const split = accents.split("").join("|");
   const reg = new RegExp(`(${split})`, "g");
 
