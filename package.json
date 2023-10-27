@@ -31,9 +31,9 @@
   },
   "homepage": "https://github.com/martpie/react-slugify#readme",
   "devDependencies": {
-    "@types/react": "^18.0.26",
+    "@types/react": "^18.2.33",
     "react": "^18.2.0",
-    "typescript": "^4.9.4",
-    "vitest": "^0.26.3"
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   }
 }
