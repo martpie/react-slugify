@@ -128,6 +128,10 @@ describe("slugify", () => {
     expect(
       slugify("đây là một thử nghiệm đối với việc xóa các âm tiết tiếng việt")
     ).toBe("day-la-mot-thu-nghiem-doi-voi-viec-xoa-cac-am-tiet-tieng-viet");
+
+    expect(
+      slugify("ĚěŘřŮů")
+    ).toBe("eerruu");
   });
 
   it("should remove multiple following delimiters", () => {
