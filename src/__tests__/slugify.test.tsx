@@ -132,6 +132,10 @@ describe("slugify", () => {
     expect(
       slugify("ĚěŘřŮů")
     ).toBe("eerruu");
+
+    expect(
+      slugify("Große")
+    ).toBe("grosse");
   });
 
   it("should remove multiple following delimiters", () => {
