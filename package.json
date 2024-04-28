@@ -2,16 +2,31 @@
   "name": "react-slugify",
   "version": "3.0.3",
   "description": "Slugify a React node",
-  "main": "dist/slugify.js",
+  "type": "module",
+  "main": "./dist/slugify.js",
+  "module": "./dist/slugify.js",
+  "types": "./dist/slugify.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/slugify.d.ts",
+        "default": "./dist/slugify.js"
+      },
+      "require": {
+        "types": "./dist/slugify.d.cts",
+        "default": "./dist/slugify.cjs"
+      }
+    }
+  },
   "files": [
     "src",
     "dist",
     "!**/__tests__"
   ],
   "scripts": {
-    "preversion": "npm run test",
-    "prepublishOnly": "npm run build",
-    "build": "tsc",
+    "preversion": "yarn test",
+    "prepublishOnly": "yarn publint && yarn build",
+    "build": "tsup src/slugify.ts --format cjs,esm --dts --sourcemap --clean",
     "test": "vitest run",
     "test:watch": "vitest watch"
   },
@@ -31,9 +46,12 @@
   },
   "homepage": "https://github.com/martpie/react-slugify#readme",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.3",
     "@types/diacritics": "^1.3.3",
     "@types/react": "^18.3.1",
+    "publint": "^0.2.7",
     "react": "^18.3.1",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "vitest": "^1.5.2"
   },
