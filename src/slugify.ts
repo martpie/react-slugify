@@ -18,7 +18,6 @@ function format(
   ignoreInvalid = false
 ): string {
   const harmonized = stripAccents(input).trim().toLowerCase();
-  console.log(harmonized);
   const safeDelimiter = getSafeRegexpString(delimiter);
 
   if (ignoreInvalid) {
