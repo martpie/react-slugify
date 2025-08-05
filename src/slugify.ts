@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { remove as stripAccents} from 'diacritics';
+import { remove as stripAccents } from 'diacritics';
 
 function getSafeRegexpString(input: string): string {
   return input
@@ -46,6 +46,7 @@ export default function slugify(
   if (!options.delimiter) options.delimiter = "-";
   if (!options.prefix) options.prefix = "";
 
+  // null, undefined, falsy
   if (!node || typeof node === "boolean") {
     return "";
   }
@@ -58,7 +59,7 @@ export default function slugify(
   }
 
   // string, number
-  if (typeof node === "string" || typeof node === "number") {
+  if (typeof node === "string" || typeof node === "number" || typeof node === "bigint") {
     const harmonizedPrefix = format(prefix, delimiter, true);
     const harmonizedNode = format(String(node), delimiter);
 
@@ -75,7 +76,15 @@ export default function slugify(
   }
 
   // ReactElement
-  if ("type" in node) return slugify(node.props.children, options);
+  if ("props" in node) {
+    if (typeof node.props !== "object" || !node.props) {
+      return "";
+    }
+
+    if ("children" in node.props)
+
+      return slugify(node.props.children as ReactNode, options);
+  }
 
   // ReactFragment (including array of nodes)
   if (Symbol.iterator in node) {
@@ -85,6 +94,10 @@ export default function slugify(
         .join(delimiter),
       options
     );
+  }
+
+  if (node instanceof Promise) {
+    throw new Error("react-slugify does not support Promises");
   }
 
   // unhandled case

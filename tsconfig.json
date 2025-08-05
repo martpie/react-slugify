@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "ES2015",
+    "target": "ESNext",
     "module": "commonjs",
     "jsx": "react",
     "moduleResolution": "node",
@@ -13,7 +13,14 @@
     "strict": true,
     "outDir": "dist",
     "declaration": true,
-    "lib": ["es2017", "dom"]
+    "lib": [
+      "ESNext",
+      "dom"
+    ]
   },
-  "exclude": ["**/node_modules", "**/__tests__/**", "dist/**"]
+  "exclude": [
+    "**/node_modules",
+    "**/__tests__/**",
+    "dist/**"
+  ]
 }
